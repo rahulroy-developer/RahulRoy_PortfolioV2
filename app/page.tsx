@@ -189,7 +189,8 @@ export function SparklesPreview() {
   return (
     <div className="flex h-[40rem] w-full flex-col items-center justify-center overflow-hidden rounded-md bg-black">
       <h1 className="relative z-20 text-center text-3xl font-bold text-white md:text-7xl lg:text-9xl">
-        TheAbhiPatel
+        TheAbhiPatel{" "}
+        {/* TheAbhiPatel - make this name with this cursonr https://cursify.vercel.app/components/snowflake-cursor */}
       </h1>
       <div className="relative h-40 w-[40rem]">
         {/* Gradients */}
