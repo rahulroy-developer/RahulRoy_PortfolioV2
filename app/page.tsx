@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Github, Linkedin, Mail, Code2, Server, Layers } from "lucide-react";
+import fluidCursor from "@/hooks/use-FluidCursor";
 
 export default function Page() {
   const [scrollY, setScrollY] = useState(0);
@@ -15,12 +16,19 @@ export default function Page() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    fluidCursor();
+  }, []);
+
   // Calculate navbar position based on scroll
   const navbarBottom = Math.max(32, 32 - scrollY * 0.5);
   const navbarTop = scrollY > 140 ? 16 : undefined;
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
+      <div className="fixed z-0 h-screen">
+        <canvas id="fluid" className="h-screen w-screen" />
+      </div>
       {/* Animated Grid Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f12_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f12_1px,transparent_1px)] bg-[size:64px_64px]"></div>
 
