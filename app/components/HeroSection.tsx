@@ -1,11 +1,12 @@
+import AnimatedCursor from "@/components/AnimatedCursor";
 import { Button } from "@/components/ui/button";
 import { Code2, Cloud, Layers, ArrowRight } from "lucide-react";
 
 const HeroSection = () => {
   return (
     <div className="bg-background relative h-screen w-full overflow-hidden">
+      <AnimatedCursor />
       {/* Background gradient */}
-      <div className="from-primary/5 via-background to-accent/5 absolute inset-0 bg-gradient-to-br" />
 
       {/* Floating geometric shapes */}
       <div className="absolute inset-0 overflow-hidden opacity-30">
