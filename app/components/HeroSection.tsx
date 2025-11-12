@@ -26,18 +26,19 @@ const HeroSection = () => {
 
           {/* Brand Name - Biggest element */}
           <div className="space-y-2">
-            <h1 className="text-7xl font-bold tracking-tight sm:text-8xl md:text-9xl">
-              <span className="from-foreground via-foreground to-muted-foreground bg-gradient-to-r bg-clip-text text-transparent">
+            <span className="text-7xl font-bold tracking-tight sm:text-8xl md:text-9xl">
+              <span className="from-foreground via-foreground to-muted-foreground bg-linear-to-r bg-clip-text text-transparent">
                 TheAbhiPatel
               </span>
-            </h1>
+            </span>
           </div>
 
           {/* Role/Tagline - Medium size */}
           <div className="space-y-3">
-            <h2 className="text-foreground text-2xl font-semibold sm:text-3xl md:text-4xl">
-              Full Stack & DevOps Engineer
-            </h2>
+            <h1 className="text-foreground text-2xl font-semibold sm:text-3xl md:text-4xl">
+              <span className="sr-only">TheAbhiPatel</span> &lt; A Full Stack & DevOps Engineer
+              /&gt;
+            </h1>
           </div>
 
           {/* Tech stack icons */}
