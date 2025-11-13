@@ -1,13 +1,16 @@
 "use client";
-import React from "react";
 import { SparklesCore } from "./ui/sparkles";
+import { TextHoverEffect } from "./ui/text-hover-effect";
 
 const FooterSparkles = () => {
   return (
     <div className="z-10 flex h-70 w-full flex-col items-center justify-center overflow-hidden rounded-md">
-      <h1 className="relative z-20 text-center text-3xl font-bold text-white md:text-7xl lg:text-9xl">
+      {/* <h1 className="relative z-20 text-center text-3xl font-bold text-white md:text-7xl lg:text-9xl">
         TheAbhiPatel
-      </h1>
+      </h1> */}
+      <div className="w-full">
+        <TextHoverEffect text="THE ABHI PATEL" />
+      </div>
       <div className="relative h-50 w-[60rem]">
         {/* Gradients */}
         <div className="absolute inset-x-20 top-0 h-[2px] w-3/4 bg-gradient-to-r from-transparent via-indigo-500 to-transparent blur-sm" />
