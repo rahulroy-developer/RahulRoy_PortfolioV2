@@ -1,12 +1,15 @@
-import React from "react";
 import HeroSection from "./components/HeroSection";
 import SkillsSection from "./components/SkillsSection";
+import Footer from "@/components/Footer";
 
 const page = () => {
   return (
-    <div className="max-w-7xl">
+    <div>
       <HeroSection />
-      <SkillsSection />
+      <div className="mx-auto max-w-7xl">
+        <SkillsSection />
+        <Footer />
+      </div>
     </div>
   );
 };
