@@ -4,7 +4,7 @@ import SkillsSection from "./components/SkillsSection";
 
 const page = () => {
   return (
-    <div>
+    <div className="max-w-7xl">
       <HeroSection />
       <SkillsSection />
     </div>
