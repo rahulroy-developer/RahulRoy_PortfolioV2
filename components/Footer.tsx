@@ -1,5 +1,7 @@
 import React from "react";
 import { Heart, Linkedin, Github, Mail } from "lucide-react";
+import FooterSparkles from "./FooterSparkles";
+import { SparklesCore } from "./ui/sparkles";
 
 // Types
 interface NavigationLink {
@@ -87,8 +89,11 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-background border-border border-t">
-      <div className="mx-auto max-w-7xl px-6 py-12">
+    <footer className="bg-background border-border relative">
+      <div className="top-0 w-full">
+        <FooterSparkles />
+      </div>
+      <div className="absolute top-20 z-50 mx-auto w-full max-w-7xl px-6 py-12">
         {/* Main Footer Content */}
         <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Navigation Sections */}
