@@ -93,7 +93,7 @@ const Footer: React.FC = () => {
       <div className="top-0 w-full">
         <FooterSparkles />
       </div>
-      <div className="absolute top-20 z-50 mx-auto w-full max-w-7xl px-6 py-12">
+      <div className="absolute top-22 z-50 mx-auto w-full max-w-7xl px-6 py-12">
         {/* Main Footer Content */}
         <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Navigation Sections */}
