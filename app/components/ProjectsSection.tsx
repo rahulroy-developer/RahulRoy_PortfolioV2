@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useRef } from "react";
 import {
   ArrowRight,
   Github,
@@ -9,7 +10,9 @@ import {
   Cpu,
   GitBranch,
   Layers,
+  Briefcase,
 } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 
 // Project data constant
 const PROJECTS = [
@@ -67,45 +70,192 @@ const PROJECTS = [
   },
 ];
 
+// Animated Code Icon SVG
+const AnimatedCodeIcon = () => (
+  <svg width="120" height="120" viewBox="0 0 120 120" className="mx-auto mb-6">
+    <defs>
+      <linearGradient id="codeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" className="[stop-color:hsl(var(--chart-2))]" />
+        <stop offset="100%" className="[stop-color:hsl(var(--chart-3))]" />
+      </linearGradient>
+    </defs>
+    <motion.circle
+      cx="60"
+      cy="60"
+      r="50"
+      fill="none"
+      stroke="url(#codeGrad)"
+      strokeWidth="2"
+      initial={{ pathLength: 0, opacity: 0 }}
+      animate={{ pathLength: 1, opacity: 1 }}
+      transition={{ duration: 2, ease: "easeInOut" }}
+    />
+    <motion.path
+      d="M 40 45 L 30 60 L 40 75"
+      fill="none"
+      stroke="url(#codeGrad)"
+      strokeWidth="3"
+      strokeLinecap="round"
+      initial={{ pathLength: 0 }}
+      animate={{ pathLength: 1 }}
+      transition={{ duration: 1, delay: 0.5 }}
+    />
+    <motion.path
+      d="M 80 45 L 90 60 L 80 75"
+      fill="none"
+      stroke="url(#codeGrad)"
+      strokeWidth="3"
+      strokeLinecap="round"
+      initial={{ pathLength: 0 }}
+      animate={{ pathLength: 1 }}
+      transition={{ duration: 1, delay: 0.5 }}
+    />
+    <motion.line
+      x1="55"
+      y1="45"
+      x2="65"
+      y2="75"
+      stroke="url(#codeGrad)"
+      strokeWidth="3"
+      strokeLinecap="round"
+      initial={{ pathLength: 0 }}
+      animate={{ pathLength: 1 }}
+      transition={{ duration: 1, delay: 0.7 }}
+    />
+  </svg>
+);
+
+// Animated SVG Background Component
+const AnimatedBackground = () => (
+  <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    <svg className="absolute h-full w-full" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" className="[stop-color:hsl(var(--chart-2))]" stopOpacity="0.15" />
+          <stop offset="100%" className="[stop-color:hsl(var(--chart-3))]" stopOpacity="0.15" />
+        </linearGradient>
+        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" className="[stop-color:hsl(var(--chart-4))]" stopOpacity="0.15" />
+          <stop offset="100%" className="[stop-color:hsl(var(--chart-5))]" stopOpacity="0.15" />
+        </linearGradient>
+      </defs>
+
+      <motion.circle
+        cx="10%"
+        cy="20%"
+        r="300"
+        fill="url(#grad1)"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
+      />
+      <motion.circle
+        cx="90%"
+        cy="80%"
+        r="250"
+        fill="url(#grad2)"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 2, delay: 0.5, repeat: Infinity, repeatType: "reverse" }}
+      />
+    </svg>
+  </div>
+);
+
+// Floating Particles Component
+const FloatingParticles = () => (
+  <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    {[...Array(20)].map((_, i) => (
+      <motion.div
+        key={i}
+        className="bg-chart-2 absolute h-1 w-1 rounded-full opacity-60"
+        style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+        }}
+        animate={{
+          y: [0, -30, 0],
+          opacity: [0, 0.6, 0],
+          scale: [0, 1, 0],
+        }}
+        transition={{
+          duration: 3 + Math.random() * 2,
+          repeat: Infinity,
+          delay: Math.random() * 2,
+        }}
+      />
+    ))}
+  </div>
+);
+
 const ProjectsSection: React.FC = () => {
   const featuredProjects = PROJECTS.filter((p) => p.featured);
+  const headerRef = useRef(null);
+  const isHeaderInView = useInView(headerRef, { once: true });
 
   return (
-    <section className="bg-background relative min-h-screen w-full overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
-      {/* Animated Background Elements */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="bg-primary/5 absolute top-20 left-10 h-72 w-72 animate-pulse rounded-full blur-3xl" />
-        <div
-          className="bg-accent/5 absolute right-10 bottom-20 h-96 w-96 animate-pulse rounded-full blur-3xl"
-          style={{ animationDelay: "1s" }}
-        />
-        <div
-          className="bg-secondary/5 absolute top-1/2 left-1/3 h-64 w-64 animate-pulse rounded-full blur-3xl"
-          style={{ animationDelay: "2s" }}
-        />
-      </div>
+    <section className="bg-background relative min-h-screen w-full overflow-hidden px-4 py-24 sm:px-6 lg:px-8">
+      <AnimatedBackground />
+      <FloatingParticles />
 
       <div className="relative z-10 mx-auto max-w-7xl">
-        {/* Header */}
-        <div className="mb-16 flex items-end justify-between">
-          <div>
-            <div className="bg-primary/10 border-primary/20 mb-4 inline-block rounded-full border px-4 py-2">
-              <span className="text-primary text-sm font-semibold">PORTFOLIO</span>
-            </div>
-            <h2 className="text-foreground from-foreground via-foreground to-foreground/60 mb-4 bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent lg:text-7xl">
-              Featured Projects
-            </h2>
-            <p className="text-muted-foreground max-w-2xl text-lg">
-              Innovative solutions showcasing full-stack development & DevOps excellence
-            </p>
-          </div>
+        {/* Enhanced Section Header */}
+        <motion.div
+          ref={headerRef}
+          initial={{ opacity: 0, y: -30 }}
+          animate={isHeaderInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
+          transition={{ duration: 0.6 }}
+          className="mb-20 text-center"
+        >
+          <AnimatedCodeIcon />
 
-          <button className="bg-primary text-primary-foreground hover:shadow-primary/20 group relative hidden items-center gap-2 overflow-hidden rounded-xl px-8 py-4 font-semibold transition-all duration-300 hover:gap-3 hover:shadow-lg lg:flex">
-            <span className="relative z-10">See All Projects</span>
-            <ArrowRight className="relative z-10 h-5 w-5" />
-            <div className="from-primary to-primary/80 absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity group-hover:opacity-100" />
-          </button>
-        </div>
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={isHeaderInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
+            transition={{ duration: 0.6, delay: 0.2, type: "spring" }}
+            className="bg-secondary text-secondary-foreground border-border mb-6 inline-flex items-center gap-2 rounded-full border px-6 py-3 shadow-md"
+          >
+            <Briefcase className="h-5 w-5" />
+            <span className="text-sm font-bold tracking-wide uppercase">My Work</span>
+          </motion.div>
+
+          <motion.h2
+            className="text-foreground mb-6 text-5xl font-black md:text-7xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isHeaderInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            Featured{" "}
+            <span className="from-chart-2 via-chart-3 to-chart-2 animate-[gradient_3s_ease_infinite] bg-gradient-to-r bg-[length:200%_100%] bg-clip-text text-transparent">
+              Projects
+            </span>
+          </motion.h2>
+
+          <motion.p
+            className="text-muted-foreground mx-auto mb-8 max-w-2xl text-xl leading-relaxed"
+            initial={{ opacity: 0 }}
+            animate={isHeaderInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            Innovative solutions showcasing{" "}
+            <span className="text-chart-2 font-bold">full-stack development</span> & DevOps
+            excellence
+          </motion.p>
+
+          {/* See All Button - Desktop */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isHeaderInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="hidden lg:block"
+          >
+            <button className="bg-primary text-primary-foreground hover:shadow-primary/20 group relative inline-flex items-center gap-2 overflow-hidden rounded-xl px-8 py-4 font-semibold transition-all duration-300 hover:gap-3 hover:shadow-lg">
+              <span className="relative z-10">See All Projects</span>
+              <ArrowRight className="relative z-10 h-5 w-5" />
+              <div className="from-primary to-primary/80 absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity group-hover:opacity-100" />
+            </button>
+          </motion.div>
+        </motion.div>
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
