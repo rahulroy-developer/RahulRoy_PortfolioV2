@@ -177,7 +177,7 @@ interface ContactInfoCardProps {
 }
 
 const ContactInfoCard: React.FC<ContactInfoCardProps> = ({ info, index }) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLAnchorElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const Icon = info.icon;
 
@@ -292,25 +292,16 @@ const ContactPage: React.FC = () => {
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
+    if (!formData.name.trim()) newErrors.name = "Name is required";
 
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
-    }
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Email is invalid";
 
-    if (!formData.subject.trim()) {
-      newErrors.subject = "Subject is required";
-    }
+    if (!formData.subject.trim()) newErrors.subject = "Subject is required";
 
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
-    } else if (formData.message.trim().length < 10) {
+    if (!formData.message.trim()) newErrors.message = "Message is required";
+    else if (formData.message.trim().length < 10)
       newErrors.message = "Message must be at least 10 characters";
-    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -318,53 +309,34 @@ const ContactPage: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    // Clear error when user starts typing
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
     if (errors[name as keyof FormErrors]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: undefined,
-      }));
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
 
     setIsSubmitting(true);
-
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     console.log("Form submitted:", formData);
 
     setIsSubmitting(false);
     setIsSubmitted(true);
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
+    setFormData({ name: "", email: "", subject: "", message: "" });
 
-    // Reset success message after 5 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 5000);
+    setTimeout(() => setIsSubmitted(false), 5000);
   };
 
   return (
     <div className="bg-background min-h-screen">
       {/* Hero Section */}
       <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
-        {/* Background gradient */}
         <div className="from-primary/5 to-chart-3/5 absolute inset-0 bg-gradient-to-br via-transparent" />
 
         <div className="relative mx-auto max-w-7xl">
@@ -433,7 +405,8 @@ const ContactPage: React.FC = () => {
                   </motion.div>
                 )}
 
-                <div onSubmit={handleSubmit} className="space-y-6">
+                {/* FIXED: changed div → form */}
+                <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Name */}
                   <div>
                     <label htmlFor="name" className="text-foreground mb-2 block font-semibold">
@@ -533,11 +506,7 @@ const ContactPage: React.FC = () => {
 
                   {/* Submit Button */}
                   <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleSubmit(e as any);
-                    }}
+                    type="submit"
                     disabled={isSubmitting}
                     className="bg-primary text-primary-foreground flex w-full items-center justify-center gap-2 rounded-xl px-8 py-4 font-bold transition-all hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
                   >
@@ -558,13 +527,12 @@ const ContactPage: React.FC = () => {
                       </>
                     )}
                   </button>
-                </div>
+                </form>
               </motion.div>
             </div>
 
             {/* Sidebar */}
             <div className="space-y-8">
-              {/* Availability */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -597,7 +565,6 @@ const ContactPage: React.FC = () => {
                 </div>
               </motion.div>
 
-              {/* Social Links */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -616,7 +583,6 @@ const ContactPage: React.FC = () => {
                 </div>
               </motion.div>
 
-              {/* Quick Info */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
