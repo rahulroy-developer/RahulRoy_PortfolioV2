@@ -14,6 +14,11 @@ import {
   Coffee,
 } from "lucide-react";
 
+// Type for Lucide icons
+type IconType = React.ComponentType<
+  React.SVGProps<SVGSVGElement> & { className?: string; strokeWidth?: number }
+>;
+
 // Animated Code Icon SVG
 const AnimatedCodeIcon = () => (
   <svg width="120" height="120" viewBox="0 0 120 120" className="mx-auto mb-6">
@@ -132,8 +137,22 @@ const FloatingParticles = () => (
   </div>
 );
 
+// Type definitions
+interface ExpertiseItem {
+  icon: IconType;
+  title: string;
+  description: string;
+  gradient: string;
+}
+
+interface ValueItem {
+  icon: IconType;
+  label: string;
+  gradient: string;
+}
+
 // Expertise areas
-const EXPERTISE = [
+const EXPERTISE: ExpertiseItem[] = [
   {
     icon: Code2,
     title: "Full Stack Development",
@@ -162,14 +181,19 @@ const EXPERTISE = [
 ];
 
 // Values
-const VALUES = [
+const VALUES: ValueItem[] = [
   { icon: Rocket, label: "Innovation", gradient: "from-chart-2 to-chart-3" },
   { icon: Target, label: "Precision", gradient: "from-chart-4 to-chart-1" },
   { icon: Heart, label: "Passion", gradient: "from-chart-5 to-chart-1" },
   { icon: Award, label: "Excellence", gradient: "from-chart-2 to-chart-4" },
 ];
 
-const ExpertiseCard = ({ item, index }) => {
+interface ExpertiseCardProps {
+  item: ExpertiseItem;
+  index: number;
+}
+
+const ExpertiseCard = ({ item, index }: ExpertiseCardProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const Icon = item.icon;
