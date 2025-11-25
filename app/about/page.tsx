@@ -93,10 +93,10 @@ interface AboutData {
 
 // Static About Data
 const ABOUT_DATA: AboutData = {
-  name: "John Doe",
+  name: "Abhishek Patel",
   role: "Full Stack Developer & DevOps Engineer",
-  location: "San Francisco, CA",
-  email: "john.doe@example.com",
+  location: "Indore, MP",
+  email: "theabhipatel.co@gmail.com",
   bio: "Passionate full-stack developer and DevOps engineer with 3+ years of experience building scalable web applications and cloud infrastructure. I love solving complex problems and creating seamless user experiences.",
   longBio: [
     "I'm a passionate technologist who thrives at the intersection of development and operations. My journey in tech started with a curiosity about how things work under the hood, which led me to explore both frontend elegance and backend robustness.",
