@@ -11,6 +11,7 @@ import {
   Sparkles,
   Zap,
   Rocket,
+  LucideIcon,
 } from "lucide-react";
 
 // Animated SVG Background Component
@@ -132,7 +133,7 @@ const AnimatedCodeIcon = () => (
 );
 
 // Animated Connection Lines
-const ConnectionLines = ({ index }) => (
+const ConnectionLines = ({ index }: { index: number }) => (
   <svg
     className="pointer-events-none absolute top-0 left-0 hidden h-full w-full md:block"
     style={{ zIndex: 0 }}
@@ -150,8 +151,23 @@ const ConnectionLines = ({ index }) => (
   </svg>
 );
 
+// Type definitions
+interface Experience {
+  id: number;
+  company: string;
+  role: string;
+  period: string;
+  location: string;
+  current: boolean;
+  description: string;
+  highlights: string[];
+  technologies: string[];
+  colorClass: string;
+  icon: LucideIcon;
+}
+
 // Experience data
-const experiences = [
+const experiences: Experience[] = [
   {
     id: 1,
     company: "Company C",
@@ -205,7 +221,12 @@ const experiences = [
   },
 ];
 
-const ExperienceCard = ({ exp, index }) => {
+interface ExperienceCardProps {
+  exp: Experience;
+  index: number;
+}
+
+const ExperienceCard = ({ exp, index }: ExperienceCardProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const IconComponent = exp.icon;
