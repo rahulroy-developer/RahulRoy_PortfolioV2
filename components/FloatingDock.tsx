@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, BookOpen, Briefcase, User } from "lucide-react";
+import { Home, BookOpen, Briefcase, GitBranch, User, Phone } from "lucide-react";
 import { useScrollVisibility } from "@/hooks/use-scroll-visibility";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -24,20 +24,26 @@ const navItems: NavItem[] = [
   {
     id: "projects",
     label: "Projects",
-    icon: <Briefcase size={20} />,
+    icon: <GitBranch size={20} />,
     href: "/projects",
   },
   {
     id: "skills",
     label: "Skills",
     icon: <BookOpen size={20} />,
-    href: "/#skills",
+    href: "/skills",
   },
   {
     id: "about",
     label: "About",
     icon: <User size={20} />,
-    href: "/#about",
+    href: "/about",
+  },
+  {
+    id: "contact",
+    label: "Contact",
+    icon: <Phone size={20} />,
+    href: "/contact",
   },
 ];
 
