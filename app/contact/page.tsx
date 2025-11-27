@@ -192,7 +192,7 @@ const ContactInfoCard: React.FC<ContactInfoCardProps> = ({ info, index }) => {
       className="bg-card border-border hover:border-primary/30 group block rounded-2xl border p-6 shadow-lg transition-all duration-300 hover:shadow-2xl"
     >
       <div
-        className={`inline-flex bg-gradient-to-br p-3 ${info.gradient} mb-4 rounded-xl transition-transform group-hover:scale-110`}
+        className={`inline-flex bg-linear-to-br p-3 ${info.gradient} mb-4 rounded-xl transition-transform group-hover:scale-110`}
       >
         <Icon className="h-6 w-6 text-white" />
       </div>
