@@ -2,7 +2,7 @@ import ExperienceSection from "./components/ExperienceSection";
 import HeroSection from "./components/HeroSection";
 import ProjectsSection from "./components/ProjectsSection";
 import Footer from "@/components/Footer";
-import SkillsSection2 from "./components/SkillsSection2";
+import SkillsSection from "./components/SkillsSection";
 import AboutSection from "./components/AboutSection";
 
 const page = () => {
@@ -10,7 +10,7 @@ const page = () => {
     <div>
       <HeroSection />
       <div className="mx-auto max-w-7xl">
-        <SkillsSection2 />
+        <SkillsSection />
         <ProjectsSection />
         <ExperienceSection />
         <AboutSection />

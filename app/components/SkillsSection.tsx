@@ -350,7 +350,7 @@ const SkillCard = ({ skill, index }) => {
   );
 };
 
-export default function SkillsSection2() {
+export default function SkillsSection() {
   const headerRef = useRef(null);
   const isHeaderInView = useInView(headerRef, { once: true });
   const featuredSkills = SKILLS.slice(0, 5);
