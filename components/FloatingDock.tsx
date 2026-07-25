@@ -198,7 +198,7 @@ const FloatingDock = (): React.ReactNode => {
                 className="flex items-center gap-2 px-3 py-1"
                 whileHover={{ scale: 1.05 }}
               >
-                <motion.div
+                {/* <motion.div
                   animate={{ scale: [1, 1.1, 1] }}
                   transition={{
                     duration: 2,
@@ -206,8 +206,8 @@ const FloatingDock = (): React.ReactNode => {
                     repeatType: "loop",
                   }}
                   className="h-2 w-2 rounded-full bg-green-500"
-                />
-                <span className="text-muted-foreground text-xs font-medium">Available</span>
+                /> */}
+                {/* <span className="text-muted-foreground text-xs font-medium">Available</span> */}
               </motion.div>
             </motion.div>
 

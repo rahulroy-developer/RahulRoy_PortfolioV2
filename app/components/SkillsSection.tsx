@@ -97,31 +97,64 @@ const AnimatedBackground = () => (
 );
 
 // Floating Particles Component
-const FloatingParticles = () => (
-  <div className="pointer-events-none absolute inset-0 overflow-hidden">
-    {[...Array(20)].map((_, i) => (
-      <motion.div
-        key={i}
-        className="bg-chart-2 absolute h-1 w-1 rounded-full opacity-60"
-        style={{
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
-        }}
-        animate={{
-          y: [0, -30, 0],
-          opacity: [0, 0.6, 0],
-          scale: [0, 1, 0],
-        }}
-        transition={{
-          duration: 3 + Math.random() * 2,
-          repeat: Infinity,
-          delay: Math.random() * 2,
-        }}
-      />
-    ))}
-  </div>
-);
+// const FloatingParticles = () => (
+//   <div className="pointer-events-none absolute inset-0 overflow-hidden">
+//     {[...Array(20)].map((_, i) => (
+//       <motion.div
+//         key={i}
+//         className="bg-chart-2 absolute h-1 w-1 rounded-full opacity-60"
+//         style={{
+//           left: `${Math.random() * 100}%`,
+//           top: `${Math.random() * 100}%`,
+//         }}
+//         animate={{
+//           y: [0, -30, 0],
+//           opacity: [0, 0.6, 0],
+//           scale: [0, 1, 0],
+//         }}
+//         transition={{
+//           duration: 3 + Math.random() * 2,
+//           repeat: Infinity,
+//           delay: Math.random() * 2,
+//         }}
+//       />
+//     ))}
+//   </div>
+// );
+import { useMemo } from "react";
+const FloatingParticles = () => {
+  const particles = Array.from({ length: 20 }, (_, i) => ({
+    left: ((i * 37) % 100) + 2,
+    top: ((i * 53) % 100) + 2,
+    duration: 3 + (i % 5) * 0.4,
+    delay: (i % 7) * 0.2,
+  }));
 
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {particles.map((p, i) => (
+        <motion.div
+          key={i}
+          className="bg-chart-2 absolute h-1 w-1 rounded-full opacity-60"
+          style={{
+            left: `${p.left}%`,
+            top: `${p.top}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            opacity: [0, 0.6, 0],
+            scale: [0, 1, 0],
+          }}
+          transition={{
+            duration: p.duration,
+            repeat: Infinity,
+            delay: p.delay,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 // Skills data constant
 const SKILLS = [
   {
